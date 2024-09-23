@@ -65,7 +65,7 @@
 			},
 			{
 				"question": "Funguje Pretendo na Cemu/emulátorech?",
-				"answer": "Pretendo podporuje jakýkoli klient který může interagovat s Nintendo Network. V současnosti je Cemu jediným emulátorem, který je tohoto schopen. Cemu 2.0 oficiálně podporuje Pretendo v nastavení Vašeho účtu. Pro bližší informace k Cemu můžete nahlédnout do <a href=\"https://pretendo.network/docs/install/cemu\">dokumentace</a>.<br>Citra nepodporuje skutečné online hraní a tudíž s Pretendem nefunguje a nezdá se, že by se toto v budoucnu změnilo. Mikage, emulátor 3DS pro mobilní zařízení, může podporu poskytnout v budoucnu, ale toto není jisté."
+				"answer": "Pretendo podporuje jakýkoli klient který může interagovat s Nintendo Network. V současnosti je Cemu jediným emulátorem, který je tohoto schopen. Cemu 2.0 oficiálně podporuje Pretendo v nastavení Vašeho účtu. Pro bližší informace k Cemu můžete nahlédnout do <a href=\"https://brocatech.com/docs/install/cemu\">dokumentace</a>.<br>Citra nepodporuje skutečné online hraní a tudíž s Pretendem nefunguje a nezdá se, že by se toto v budoucnu změnilo. Mikage, emulátor 3DS pro mobilní zařízení, může podporu poskytnout v budoucnu, ale toto není jisté."
 			},
 			{
 				"question": "Pokud jsem zabanován(a) na Nintendo Network, přenese se můj ban do Pretenda?",

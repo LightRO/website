@@ -80,8 +80,8 @@ async function renderDataMiddleware(request, response, next) {
 	response.locals.error_message = request.cookies.error_message;
 
 	// Reset message cookies
-	response.clearCookie('success_message', { domain: '.pretendo.network' });
-	response.clearCookie('error_message', { domain: '.pretendo.network' });
+	response.clearCookie('success_message', { domain: '.brocatech.com' });
+	response.clearCookie('error_message', { domain: '.brocatech.com' });
 
 	response.locals.isLoggedIn = request.cookies.access_token && request.cookies.refresh_token;
 
@@ -99,7 +99,7 @@ async function renderDataMiddleware(request, response, next) {
 
 			return next();
 		} catch (error) {
-			response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+			response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 			return response.redirect('/account/logout');
 		}
 	} else {

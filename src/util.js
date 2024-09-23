@@ -143,9 +143,9 @@ async function refreshLogin(request, response) {
 
 	const tokens = apiResponse.body;
 
-	response.cookie('refresh_token', tokens.refresh_token, { domain: '.pretendo.network' });
-	response.cookie('access_token', tokens.access_token, { domain: '.pretendo.network' });
-	response.cookie('token_type', tokens.token_type, { domain: '.pretendo.network' });
+	response.cookie('refresh_token', tokens.refresh_token, { domain: '.brocatech.com' });
+	response.cookie('access_token', tokens.access_token, { domain: '.brocatech.com' });
+	response.cookie('token_type', tokens.token_type, { domain: '.brocatech.com' });
 
 	request.cookies.refresh_token = tokens.refresh_token;
 	request.cookies.access_token = tokens.access_token;

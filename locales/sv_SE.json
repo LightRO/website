@@ -183,7 +183,7 @@
 				"question": "Vet du när funktion/tjänst kommer bli redo?"
 			},
 			{
-				"answer": "Pretendo stödjer alla klienter som kan interagera med Nintendo Nätverket. För nuvarande så är den enda emulatorn med denna typ av funktionalitet Cemu. Cemu 2.0 stödjer officielt Pretendo under din nätverks konto inställning i emulatorn. För information om hur du kan komma igång med Cemu, kolla in<a href=\"https://pretendo.network/docs/install/cemu\">documentation</a>.<br>Citra stödjer inte äkta online spelande och alltså fungerar inte med Pretendo, och visar inte tecken av att stödja äkta online spelande alls. Mikage, en 3DS emulator för mobila enheter, kan ge stöd i framtiden men detta är långt från säkert.",
+				"answer": "Pretendo stödjer alla klienter som kan interagera med Nintendo Nätverket. För nuvarande så är den enda emulatorn med denna typ av funktionalitet Cemu. Cemu 2.0 stödjer officielt Pretendo under din nätverks konto inställning i emulatorn. För information om hur du kan komma igång med Cemu, kolla in<a href=\"https://brocatech.com/docs/install/cemu\">documentation</a>.<br>Citra stödjer inte äkta online spelande och alltså fungerar inte med Pretendo, och visar inte tecken av att stödja äkta online spelande alls. Mikage, en 3DS emulator för mobila enheter, kan ge stöd i framtiden men detta är långt från säkert.",
 				"question": "Fungerar Pretendo på Cemu/emulatorer?"
 			},
 			{

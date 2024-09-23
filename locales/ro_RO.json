@@ -63,7 +63,7 @@
 			},
 			{
 				"question": "Funcționează Pretendo pe Cemu/emulatoare?",
-				"answer": "Pretendo funcționează pe orice client care poate interacționa cu Nintendo Network. Momentan singurul emulator cu această funcționalitate este Cemu. Cemu 2.0 permite folosirea Pretendo prin schimbarea setărilor legate de cont. Pentru începe să folosiți Cemu, vedeți <a href=\"https://pretendo.network/docs/install/cemu\">documentația</a>.<br>Citra nu oferă nici un fel de funcționalitate online, deci nu poate folosi Pretendo și nu sunt semne că va permite vreodată funcționalitate online. Mikage, un emulator 3DS pentru dispozitive mobile, ar putea oferi această funcționalitate, dar nu avem nimic mai mult de spus."
+				"answer": "Pretendo funcționează pe orice client care poate interacționa cu Nintendo Network. Momentan singurul emulator cu această funcționalitate este Cemu. Cemu 2.0 permite folosirea Pretendo prin schimbarea setărilor legate de cont. Pentru începe să folosiți Cemu, vedeți <a href=\"https://brocatech.com/docs/install/cemu\">documentația</a>.<br>Citra nu oferă nici un fel de funcționalitate online, deci nu poate folosi Pretendo și nu sunt semne că va permite vreodată funcționalitate online. Mikage, un emulator 3DS pentru dispozitive mobile, ar putea oferi această funcționalitate, dar nu avem nimic mai mult de spus."
 			},
 			{
 				"question": "Dacă sunt restricționat de pe Nintendo Network, o să rămân restricționat și pe Pretendo?",
