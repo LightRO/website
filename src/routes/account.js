@@ -152,12 +152,37 @@ router.get('/logout', async (_request, response) => {
 });
 
 router.get('/forgot-password', async (request, response) => {
-	response.render('account/forgot-password');
+	const renderData = {
+		input: request.cookies.input,
+		success_message: request.cookies.success_message,
+		error_message: request.cookies.error_message,
+	}
+
+	response.clearCookie('input', { domain: '.brocatech.com' });
+
+	response.render('account/forgot-password', renderData);
 });
 
 router.post('/forgot-password', async (request, response) => {
-	const apiResponse = await util.apiPostRequest('/v1/forgot-password', {}, request.body);
-	response.json(apiResponse.body);
+	const { input, 'h-captcha-response': hCaptchaResponse } = request.body;
+
+	response.cookie('input', input, { domain: '.brocatech.com' });
+
+	try {
+		await util.forgotPassword({
+			input,
+			hCaptchaResponse
+		})
+
+		response.clearCookie('input', { domain: '.brocatech.com' });
+
+		response.cookie('success_message', 'An email has been sent.', { domain: '.brocatech.com' });
+
+		response.redirect(request.redirect || '/account/forgot-password');
+	} catch (error) {
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
+		return response.redirect('/account/forgot-password');
+	}
 });
 
 router.get('/reset-password', async (request, response) => {
