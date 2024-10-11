@@ -54,7 +54,7 @@ router.get('/', requireLoginMiddleware, async (request, response) => {
 		try {
 			renderData.discordUser = await discordRest.get(DiscordRoutes.user(account.connections.discord.id));
 		} catch (error) {
-			response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+			response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 		}
 	} else {
 		// If no Discord account linked, generate an auth URL
@@ -71,7 +71,8 @@ router.get('/', requireLoginMiddleware, async (request, response) => {
 
 router.get('/login', async (request, response) => {
 	const renderData = {
-		error: request.cookies.error_message
+		error: request.cookies.error_message,
+		loginPath: '/account/login'
 	};
 
 	response.render('account/login', renderData);
@@ -83,15 +84,14 @@ router.post('/login', async (request, response) => {
 	try {
 		const tokens = await util.login(username, password);
 
-		response.cookie('refresh_token', tokens.refresh_token, { domain: '.pretendo.network' });
-		response.cookie('access_token', tokens.access_token, { domain: '.pretendo.network' });
-		response.cookie('token_type', tokens.token_type, { domain: '.pretendo.network' });
+		response.cookie('refresh_token', tokens.refresh_token, { domain: '.brocatech.com' });
+		response.cookie('access_token', tokens.access_token, { domain: '.brocatech.com' });
+		response.cookie('token_type', tokens.token_type, { domain: '.brocatech.com' });
 
 		response.redirect(request.redirect || '/account');
-
 	} catch (error) {
 		console.log(error);
-		response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 		return response.redirect('/account/login');
 	}
 });
@@ -104,9 +104,9 @@ router.get('/register', async (request, response) => {
 		error: request.cookies.error_message
 	};
 
-	response.clearCookie('email', { domain: '.pretendo.network' });
-	response.clearCookie('username', { domain: '.pretendo.network' });
-	response.clearCookie('mii_name', { domain: '.pretendo.network' });
+	response.clearCookie('email', { domain: '.brocatech.com' });
+	response.clearCookie('username', { domain: '.brocatech.com' });
+	response.clearCookie('mii_name', { domain: '.brocatech.com' });
 
 	response.render('account/register', renderData);
 });
@@ -114,9 +114,9 @@ router.get('/register', async (request, response) => {
 router.post('/register', async (request, response) => {
 	const { email, username, mii_name, password, password_confirm, 'h-captcha-response': hCaptchaResponse } = request.body;
 
-	response.cookie('email', email, { domain: '.pretendo.network' });
-	response.cookie('username', username, { domain: '.pretendo.network' });
-	response.cookie('mii_name', mii_name, { domain: '.pretendo.network' });
+	response.cookie('email', email, { domain: '.brocatech.com' });
+	response.cookie('username', username, { domain: '.brocatech.com' });
+	response.cookie('mii_name', mii_name, { domain: '.brocatech.com' });
 
 	try {
 		const tokens = await util.register({
@@ -128,36 +128,61 @@ router.post('/register', async (request, response) => {
 			hCaptchaResponse
 		});
 
-		response.cookie('refresh_token', tokens.refresh_token, { domain: '.pretendo.network' });
-		response.cookie('access_token', tokens.access_token, { domain: '.pretendo.network' });
-		response.cookie('token_type', tokens.token_type, { domain: '.pretendo.network' });
+		response.cookie('refresh_token', tokens.refresh_token, { domain: '.brocatech.com' });
+		response.cookie('access_token', tokens.access_token, { domain: '.brocatech.com' });
+		response.cookie('token_type', tokens.token_type, { domain: '.brocatech.com' });
 
-		response.clearCookie('email', { domain: '.pretendo.network' });
-		response.clearCookie('username', { domain: '.pretendo.network' });
-		response.clearCookie('mii_name', { domain: '.pretendo.network' });
+		response.clearCookie('email', { domain: '.brocatech.com' });
+		response.clearCookie('username', { domain: '.brocatech.com' });
+		response.clearCookie('mii_name', { domain: '.brocatech.com' });
 
 		response.redirect(request.redirect || '/account');
 	} catch (error) {
-		response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 		return response.redirect('/account/register');
 	}
 });
 
 router.get('/logout', async (_request, response) => {
-	response.clearCookie('refresh_token', { domain: '.pretendo.network' });
-	response.clearCookie('access_token', { domain: '.pretendo.network' });
-	response.clearCookie('token_type', { domain: '.pretendo.network' });
+	response.clearCookie('refresh_token', { domain: '.brocatech.com' });
+	response.clearCookie('access_token', { domain: '.brocatech.com' });
+	response.clearCookie('token_type', { domain: '.brocatech.com' });
 
 	response.redirect('/');
 });
 
 router.get('/forgot-password', async (request, response) => {
-	response.render('account/forgot-password');
+	const renderData = {
+		input: request.cookies.input,
+		success_message: request.cookies.success_message,
+		error_message: request.cookies.error_message,
+	}
+
+	response.clearCookie('input', { domain: '.brocatech.com' });
+
+	response.render('account/forgot-password', renderData);
 });
 
 router.post('/forgot-password', async (request, response) => {
-	const apiResponse = await util.apiPostRequest('/v1/forgot-password', {}, request.body);
-	response.json(apiResponse.body);
+	const { input, 'h-captcha-response': hCaptchaResponse } = request.body;
+
+	response.cookie('input', input, { domain: '.brocatech.com' });
+
+	try {
+		await util.forgotPassword({
+			input,
+			hCaptchaResponse
+		})
+
+		response.clearCookie('input', { domain: '.brocatech.com' });
+
+		response.cookie('success_message', 'An email has been sent.', { domain: '.brocatech.com' });
+
+		response.redirect(request.redirect || '/account/forgot-password');
+	} catch (error) {
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
+		return response.redirect('/account/forgot-password');
+	}
 });
 
 router.get('/reset-password', async (request, response) => {
@@ -179,7 +204,7 @@ router.get('/connect/discord', requireLoginMiddleware, async (request, response)
 			grantType: 'authorization_code',
 		});
 	} catch (error) {
-		response.cookie('error_message', 'Invalid Discord authorization code. Please try again', { domain: '.pretendo.network' });
+		response.cookie('error_message', 'Invalid Discord authorization code. Please try again', { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	}
 
@@ -204,10 +229,10 @@ router.get('/connect/discord', requireLoginMiddleware, async (request, response)
 			}
 		}
 
-		response.cookie('success_message', 'Discord account linked successfully', { domain: '.pretendo.network' });
+		response.cookie('success_message', 'Discord account linked successfully', { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	} catch (error) {
-		response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	}
 });
@@ -233,10 +258,10 @@ router.get('/remove/discord', requireLoginMiddleware, async (request, response) 
 			}
 		}
 
-		response.cookie('success_message', 'Discord account removed successfully', { domain: '.pretendo.network' });
+		response.cookie('success_message', 'Discord account removed successfully', { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	} catch (error) {
-		response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	}
 });
@@ -324,7 +349,7 @@ router.post('/stripe/checkout/:priceId', requireLoginMiddleware, async (request,
 	const pnid = await database.PNID.findOne({ pid });
 
 	if (pnid.get('access_level') >= 2) {
-		response.cookie('error_message', 'Staff members do not need to purchase tiers', { domain: '.pretendo.network' });
+		response.cookie('error_message', 'Staff members do not need to purchase tiers', { domain: '.brocatech.com' });
 		return response.redirect('/account');
 	}
 
@@ -346,7 +371,7 @@ router.post('/stripe/checkout/:priceId', requireLoginMiddleware, async (request,
 	} catch (error) {
 		// Maybe we need a dedicated error page?
 		// Or handle this as not cookies?
-		response.cookie('error_message', error.message, { domain: '.pretendo.network' });
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
 
 		return response.redirect('/account');
 	}
@@ -381,13 +406,13 @@ router.post('/stripe/unsubscribe', requireLoginMiddleware, async (request, respo
 		} catch (error) {
 			logger.error(`Error canceling old user subscription | ${pnid.get('connections.stripe.customer_id')}, ${pid}, ${subscriptionId} | - ${error.message}`);
 
-			response.cookie('error_message', 'Error canceling subscription! Contact support if issue persists', { domain: '.pretendo.network' });
+			response.cookie('error_message', 'Error canceling subscription! Contact support if issue persists', { domain: '.brocatech.com' });
 
 			return response.redirect('/account');
 		}
 	}
 
-	response.cookie('success', `Unsubscribed from ${tierName}`, { domain: '.pretendo.network' });
+	response.cookie('success', `Unsubscribed from ${tierName}`, { domain: '.brocatech.com' });
 	return response.redirect('/account');
 });
 
@@ -407,5 +432,138 @@ router.post('/stripe/webhook', async (request, response) => {
 	response.json({ received: true });
 });
 
+router.get('/sso/discourse', async (request, response, next) => {
+	if (!request.query.sso || !request.query.sig) {
+		return next(); // * 404
+	}
+
+	const signature = util.signDiscoursePayload(request.query.sso);
+
+	if (signature !== request.query.sig) {
+		return next(); // * 404
+	}
+
+	const decodedPayload = new URLSearchParams(Buffer.from(request.query.sso, 'base64').toString());
+
+	if (!decodedPayload.has('nonce') || !decodedPayload.has('return_sso_url')) {
+		return next(); // * 404
+	}
+
+	// * User already logged in, don't show the login prompt
+	if (request.cookies.access_token && request.cookies.refresh_token) {
+		try {
+			const accountData = await util.getUserAccountData(request, response);
+
+			// * Discourse REQUIRES unique emails, however we do not due to NN also
+			// * not requiring unique email addresses. Email addresses, for now,
+			// * are faked using the users PID. This will essentially disable email
+			// * for the forum, but it's a bullet we have to bite for right now.
+			// TODO - We can run our own SMTP server which maps fake emails (pid@pretendo.whatever) to users real emails
+			const payload = Buffer.from(new URLSearchParams({
+				nonce: decodedPayload.get('nonce'),
+				external_id: accountData.pid,
+				email: `${accountData.pid}@invalid.com`, // * Hack to get unique emails
+				username: accountData.username,
+				name: accountData.username,
+				avatar_url: accountData.mii.image_url,
+				avatar_force_update: true
+			}).toString()).toString('base64');
+
+			const query = new URLSearchParams({
+				sso: payload,
+				sig: util.signDiscoursePayload(payload)
+			}).toString();
+
+			return response.redirect(`${decodedPayload.get('return_sso_url')}?${query}`);
+		} catch (error) {
+			console.log(error);
+			response.cookie('error_message', error.message, { domain: '.brocatech.com' });
+			return response.redirect('/account/logout');
+		}
+	}
+
+	// * User not logged in already, show the login page
+	const renderData = {
+		discourse: {
+			// * Fast and dirty sanitization. If the strings contain
+			// * characters not allow in their encodings, they are removed
+			// * when doing this decode-encode. Since neither base64/hex
+			// * allow characters such as < and >, this prevents injection.
+			payload: Buffer.from(request.query.sso, 'base64').toString('base64'),
+			signature: Buffer.from(request.query.sig, 'hex').toString('hex')
+		},
+		loginPath: '/account/sso/discourse'
+	};
+
+	response.render('account/login', renderData); // * Just reuse the /account/login page, no need to duplicate the pages
+});
+
+router.post('/sso/discourse', async (request, response, next) => {
+	if (!request.body['discourse-sso-payload'] || !request.body['discourse-sso-signature']) {
+		return next(); // * 404
+	}
+
+	const { username, password } = request.body;
+
+	// * Fast and dirty sanitization. If the strings contain
+	// * characters not allow in their encodings, they are removed
+	// * when doing this decode-encode. Since neither base64/hex
+	// * allow characters such as < and >, this prevents injection.
+	const discoursePayload = Buffer.from(request.body['discourse-sso-payload'], 'base64').toString('base64');
+	const discourseSignature = Buffer.from(request.body['discourse-sso-signature'], 'hex').toString('hex');
+
+	const signature = util.signDiscoursePayload(discoursePayload);
+
+	if (signature !== discourseSignature) {
+		return next(); // * 404
+	}
+
+	const decodedPayload = new URLSearchParams(Buffer.from(discoursePayload, 'base64').toString());
+
+	if (!decodedPayload.has('nonce') || !decodedPayload.has('return_sso_url')) {
+		return next(); // * 404
+	}
+
+	try {
+		const tokens = await util.login(username, password);
+
+		response.cookie('refresh_token', tokens.refresh_token, { domain: '.brocatech.com' });
+		response.cookie('access_token', tokens.access_token, { domain: '.brocatech.com' });
+		response.cookie('token_type', tokens.token_type, { domain: '.brocatech.com' });
+
+		// * Need to set these here so that getUserAccountData can see them
+		request.cookies.refresh_token = tokens.refresh_token;
+		request.cookies.access_token = tokens.access_token;
+		request.cookies.token_type = tokens.token_type;
+
+		const accountData = await util.getUserAccountData(request, response);
+
+		// * Discourse REQUIRES unique emails, however we do not due to NN also
+		// * not requiring unique email addresses. Email addresses, for now,
+		// * are faked using the users PID. This will essentially disable email
+		// * for the forum, but it's a bullet we have to bite for right now.
+		// TODO - We can run our own SMTP server which maps fake emails (pid@pretendo.whatever) to users real emails
+		const payload = Buffer.from(new URLSearchParams({
+			nonce: decodedPayload.get('nonce'),
+			external_id: accountData.pid,
+			email: `${accountData.pid}@invalid.com`, // * Hack to get unique emails
+			username: accountData.username,
+			name: accountData.username,
+			avatar_url: accountData.mii.image_url,
+			avatar_force_update: true
+		}).toString()).toString('base64');
+
+		const query = new URLSearchParams({
+			sso: payload,
+			sig: util.signDiscoursePayload(payload)
+		}).toString();
+
+		return response.redirect(`${decodedPayload.get('return_sso_url')}?${query}`);
+	} catch (error) {
+		console.log(error);
+		response.cookie('error_message', error.message, { domain: '.brocatech.com' });
+		return response.redirect('/account/login');
+	}
+});
 
 module.exports = router;

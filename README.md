@@ -1,6 +1,6 @@
 # Website
 
-This repository contains the source code for [our website](https://pretendo.network). All contributions should go in the [dev branch](https://github.com/PretendoNetwork/website/tree/dev).
+This repository contains the source code for [our website](https://brocatech.com). All contributions should go in the [dev branch](https://github.com/PretendoNetwork/website/tree/dev).
 
 ### Localization
 If you'd like to help localize Pretendo Network, you can check out our project on [Weblate](https://hosted.weblate.org/engage/pretendonetwork/).

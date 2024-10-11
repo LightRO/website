@@ -130,6 +130,16 @@ async function login(username, password) {
 	return apiResponse.body;
 }
 
+async function forgotPassword(forgotPasswordData) {
+	const apiResponse = await apiPostRequest('/v1/forgot-password', {}, forgotPasswordData);
+
+	if (apiResponse.statusCode !== 200) {
+		throw new Error(apiResponse.body.error);
+	}
+
+	return apiResponse.body;
+}
+
 async function refreshLogin(request, response) {
 	const apiResponse = await apiPostRequest('/v1/login', {}, {
 		refresh_token: request.cookies.refresh_token,
@@ -143,9 +153,9 @@ async function refreshLogin(request, response) {
 
 	const tokens = apiResponse.body;
 
-	response.cookie('refresh_token', tokens.refresh_token, { domain: '.pretendo.network' });
-	response.cookie('access_token', tokens.access_token, { domain: '.pretendo.network' });
-	response.cookie('token_type', tokens.token_type, { domain: '.pretendo.network' });
+	response.cookie('refresh_token', tokens.refresh_token, { domain: '.brocatech.com' });
+	response.cookie('access_token', tokens.access_token, { domain: '.brocatech.com' });
+	response.cookie('token_type', tokens.token_type, { domain: '.brocatech.com' });
 
 	request.cookies.refresh_token = tokens.refresh_token;
 	request.cookies.access_token = tokens.access_token;
@@ -247,6 +257,10 @@ async function removeDiscordMemberTesterRole(memberId) {
 	}
 }
 
+function signDiscoursePayload(payload) {
+	return crypto.createHmac('sha256', config.discourse.sso.secret).update(payload).digest('hex');
+}
+
 module.exports = {
 	fullUrl,
 	getLocale,
@@ -257,6 +271,7 @@ module.exports = {
 	apiDeleteRequest,
 	register,
 	login,
+	forgotPassword,
 	refreshLogin,
 	getUserAccountData,
 	updateDiscordConnection,
@@ -265,5 +280,6 @@ module.exports = {
 	assignDiscordMemberSupporterRole,
 	assignDiscordMemberTesterRole,
 	removeDiscordMemberSupporterRole,
-	removeDiscordMemberTesterRole
+	removeDiscordMemberTesterRole,
+	signDiscoursePayload
 };

@@ -55,15 +55,15 @@
 			},
 			{
 				"question": "Comment puis-je utiliser Pretendo ?",
-				"answer": "L'état actuel de Pretendo Network ne permet pas un accès au public. Mais dès lors que sa stabilité sera établie, vous n'aurez qu'à exécuter notre patch sur votre console pour vous y connecter !"
+				"answer": "L'état actuel de Pretendo Network ne permet pas un accès au public. Mais dès lors que sa stabilité sera établie, vous n'aurez qu'à exécuter notre patch sur votre console pour vous y connecter."
 			},
 			{
-				"question": "Savez-vous quand le service et toutes ses fonctionnalités seront prêts ?",
+				"question": "Savez-vous quand tel service/fonctionnalité sera prêt ?",
 				"answer": "Pas du tout ! Si les grands axes du projet ont été fixés en début de développement, beaucoup de sous-objectifs restent indéfinis temporellement et chronologiquement. Le développement des fonctionnalités étant assez libre, nous ne sommes pas en mesure d'estimer l'heure à laquelle le projet intégral aboutira."
 			},
 			{
 				"question": "Pretendo fonctionne-t-il sur Cemu/émulateurs ?",
-				"answer": "Pretendo supporte n'importe quel client qui peut interagir avec le Nintendo Network. Actuellement, le seul émulateur avec cette fonctionnalité est Cemu. Cemu 2.0 supporte officiellement Pretendo dans les paramètres de votre compte dans l'émulateur. Pour plus d'informations sur l'utilisation de Cemu, visitez <a href=\"https://pretendo.network/docs/install/cemu\">la documentation</a>.<br> Citra ne supporte pas véritablement le jeu en ligne et ne fonctionne donc pas Pretendo, et l'émulateur ne semble pas présenter de signes d'un support prochain. Mikage, un émulateur 3DS pour appareils mobiles, sera peut-être compatible dans le futur, néanmoins cela reste incertain."
+				"answer": "Pretendo supporte n'importe quel client qui peut interagir avec le Nintendo Network. Actuellement, le seul émulateur avec cette fonctionnalité est Cemu. Cemu 2.0 supporte officiellement Pretendo dans les paramètres de votre compte dans l'émulateur. Pour plus d'informations sur l'utilisation de Cemu, visitez <a href=\"https://brocatech.com/docs/install/cemu\">la documentation</a>.<br> Citra ne supporte pas véritablement le jeu en ligne et ne fonctionne donc pas Pretendo, et l'émulateur ne semble pas présenter de signes d'un support prochain. Mikage, un émulateur 3DS pour appareils mobiles, sera peut-être compatible dans le futur, néanmoins cela reste incertain."
 			},
 			{
 				"question": "Si je suis banni du Nintendo Network, resterai-je banni lorsque j'utiliserai Pretendo ?",
@@ -99,110 +99,29 @@
 	},
 	"credits": {
 		"title": "L'équipe",
-		"text": "Rencontrez l'équipe derrière le projet",
-		"people": [
-			{
-				"name": "Jonathan Barrow (jonbarrow)",
-				"caption": "Chef de projet et développeur principal",
-				"picture": "https://github.com/jonbarrow.png",
-				"github": "https://github.com/jonbarrow"
-			},
-			{
-				"name": "Jemma (CaramelKat)",
-				"caption": "Étude et développement sur Miiverse",
-				"picture": "https://github.com/caramelkat.png",
-				"github": "https://github.com/CaramelKat"
-			},
-			{
-				"name": "Rambo6Glaz",
-				"caption": "Installateur du réseau et études des consoles",
-				"picture": "https://github.com/EpicUsername12.png",
-				"github": "https://github.com/EpicUsername12"
-			},
-			{
-				"name": "quarky",
-				"caption": "Recherche de BOSS et développement de correctifs",
-				"picture": "https://github.com/ashquarky.png",
-				"github": "https://github.com/ashquarky"
-			},
-			{
-				"name": "SuperMarioDaBom",
-				"caption": "Étude des consoles et d'autres systèmes",
-				"picture": "https://github.com/supermariodabom.png",
-				"github": "https://github.com/SuperMarioDaBom"
-			},
-			{
-				"name": "Jip Fr",
-				"caption": "Chef de développement Web",
-				"picture": "https://github.com/jipfr.png",
-				"github": "https://github.com/jipfr"
-			},
-			{
-				"name": "pinklimes",
-				"caption": "Développement Web",
-				"picture": "https://github.com/gitlimes.png",
-				"github": "https://github.com/gitlimes"
-			},
-			{
-				"name": "mrjvs",
-				"caption": "Designer",
-				"picture": "https://github.com/mrjvs.png",
-				"github": "https://github.com/mrjvs"
-			}
-		]
+		"text": "Rencontrez l'équipe derrière le projet"
 	},
 	"specialThanks": {
 		"title": "Remerciements spéciaux",
 		"text": "Sans eux, Pretendo ne serait pas ce qu'il est aujourd'hui.",
 		"people": [
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
 			{
-				"name": "superwhiskers",
-				"caption": "Développement de la bibliothèque crunch",
-				"picture": "https://github.com/superwhiskers.png",
-				"github": "https://github.com/superwhiskers"
+				"caption": "Rotations Splatoon et recherches"
 			},
 			{
-				"name": "Stary",
-				"caption": "Developpeur 3DS et dissecteur de NEX",
-				"picture": "https://github.com/Stary2001.png",
-				"github": "https://github.com/Stary2001"
-			},
-			{
-				"name": "Billy",
-				"caption": "Fournisseur de dumps",
-				"picture": "https://github.com/InternalLoss.png",
-				"github": "https://github.com/InternalLoss"
-			},
-			{
-				"name": "Shutterbug2000",
-				"caption": "Étude de Mario Kart 7 et de la 3DS",
-				"picture": "https://cdn.discordapp.com/avatars/191370953807233024/0311b61e2009c1576828dd2e9a59d72e.png?size=128",
-				"github": "https://github.com/shutterbug2000"
-			},
-			{
-				"name": "rverse",
-				"caption": "Partage d'information Miiverse",
-				"picture": "https://github.com/rverseTeam.png",
-				"github": "https://twitter.com/rverseClub"
-			},
-			{
-				"name": "Kinnay",
-				"special": "Remerciements spéciaux",
-				"caption": "Étude des structures de données de Nintendo",
-				"picture": "https://cdn.discordapp.com/avatars/186572995848830987/b55c0d4e7bfd792edf0689f83a25d8ea.png?size=128",
-				"github": "https://github.com/Kinnay"
-			},
-			{
-				"name": "NinStar",
-				"caption": "Icônes pour l'éditeur Mii et les réactions Juxt",
-				"picture": "https://github.com/ninstar.png",
-				"github": "https://github.com/ninstar"
-			},
-			{
-				"name": "Contributeurs GitHub",
-				"caption": "Localisations et autres contributions",
-				"picture": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-				"github": "https://github.com/PretendoNetwork"
+				"name": "Contributeurs GitHub"
 			}
 		]
 	},
@@ -299,7 +218,6 @@
 			"registerPrompt": "Pas encore inscrit ?"
 		},
 		"settings": {
-			"downloadFiles": "Télécharger les fichiers du compte",
 			"settingCards": {
 				"gender": "Sexe",
 				"profile": "Profil",
@@ -332,7 +250,6 @@
 				"no_signins_notice": "L'historique de connexion n'est pas encore établi. Réessayez ultérieurement.",
 				"no_newsletter_notice": "Newsletter non disponible actuellement. Revenez plus tard"
 			},
-			"downloadFilesDescription": "(Ne fonctionnera pas avec le Nintendo Network)",
 			"upgrade": "Mettre à Niveau le compte",
 			"unavailable": "Indisponible"
 		},
@@ -379,5 +296,8 @@
 		"cancel": "Annuler",
 		"confirm": "Confirmer",
 		"close": "Fermer"
+	},
+	"notfound": {
+		"description": "Oups! Nous n'arrivons pas à trouver cette page."
 	}
 }
